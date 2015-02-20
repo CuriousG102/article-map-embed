@@ -1,0 +1,40 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+</head>
+<body>
+	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+	<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+	<script src="http://www.mapquestapi.com/sdk/leaflet/v1.s/mq-map.js?key=Fmjtd%7Cluu8216an5%2Crw%3Do5-947w0w"></script>
+	<style>
+		#map {
+			height: 50vh;
+		}
+	</style>
+	<script>
+		var markerInfos = {{JSON|tojson|safe}}
+
+		// /***** To be replaced by Jinja2 template ****/
+		// marker = L.marker([30.295956, -97.736087])
+		// marker.bindPopup("<b>Trashy Heights</b><br><b>Number of Occupants: </b>9,000<br><b>Location: </b>3121 Speedway<br><b>Delayed: </b>Yes<br><b>Summary: </b>The residents here trashed trashy heights")
+		// markers.push(marker);
+		// /********************************************/
+
+		window.onload = function() {
+			var map = L.map('map', { 
+							layers: MQ.mapLayer(),
+							center: [30.31, -97.76],
+							zoom: 13
+			});
+			for (var i = 0; i < markerInfo.length; i++) {
+				markerInfo = markerInfos[i]
+				marker = L.marker(markerInfo['latLong'])
+
+			}
+		}
+	</script>
+	<div id="map"></div>
+</body>
+</html>

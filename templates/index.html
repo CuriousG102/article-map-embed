@@ -1,0 +1,45 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+</head>
+<body>
+	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+	<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+	<script src="http://www.mapquestapi.com/sdk/leaflet/v1.s/mq-map.js?key=MQ_KEY_HERE"></script>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.min.js"></script>
+	<style>
+		#map {
+			height: 50vh;
+		}
+	</style>
+	<script>
+		var markerInfos = {{JSON|safe}};
+		window.onload = function() {
+			var map = L.map('map', { 
+							layers: MQ.mapLayer(),
+							center: [30.31, -97.76],
+							zoom: 13
+			});
+			for (var i = 0; i < markerInfos.length; i++) {
+				var markerInfo = markerInfos[i];
+
+				console.log(markerInfo);
+				console.log({ markerColor: markerInfo['color'],
+					                  	                             icon:        markerInfo['icon'] }    );
+				var marker = L.marker(markerInfo['latLong'],
+					                  {icon: L.AwesomeMarkers.icon({ markerColor: markerInfo['color'],
+					                  	                             icon:        markerInfo['icon'] }    )})
+
+				marker.bindPopup(markerInfo['popUp']);
+				
+				marker.addTo(map);
+			}
+		}
+	</script>
+	<div id="map"></div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+</head>
+<body>
+	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+	<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+	<script src="http://www.mapquestapi.com/sdk/leaflet/v1.s/mq-map.js?key=Fmjtd%7Cluu8216an5%2Crw%3Do5-947w0w"></script>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.min.js"></script>
+	<style>
+		#map {
+			height: 50vh;
+		}
+	</style>
+	<script>
+		var markerInfos = [{"color":"red","latLong":[30.295956,-97.736087],"popUp":"<b>Trashy Height</b><br> <b>Number of Occupants: </b>9000<br> <b>Location: </b>3121 Speedway Austin, TX 78705<br> <b>Delayed: </b>Yes<br> <b>Summary: </b>The residents here trashed trashy height<br> <b>Year: </b>2014<br> <b>Month: </b>1<br> <b>Special: </b>True<br> <b>MarkerFormat: color: </b>red<br> <b>MarkerFormat: icon: </b>building<br>","icon":"building"},{"color":"blue","latLong":[30.2828076,-97.7367752],"popUp":"<b>Faulty Towers</b><br> <b>Number of Occupants: </b>5000<br> <b>Location: </b>201 E 21st St Austin, TX 78705<br> <b>Delayed: </b>No<br> <b>Summary: </b><br> <b>Year: </b><br> <b>Month: </b><br> <b>Special: </b>False<br> <b>MarkerFormat: color: </b>blue<br> <b>MarkerFormat: icon: </b>building<br>","icon":"building"}];
+		window.onload = function() {
+			var map = L.map('map', { 
+							layers: MQ.mapLayer(),
+							center: [30.31, -97.76],
+							zoom: 13
+			});
+			for (var i = 0; i < markerInfos.length; i++) {
+				var markerInfo = markerInfos[i];
+
+				console.log(markerInfo);
+				console.log({ markerColor: markerInfo['color'],
+					                  	                             icon:        markerInfo['icon'] }    );
+				var marker = L.marker(markerInfo['latLong'],
+					                  {icon: L.AwesomeMarkers.icon({ markerColor: markerInfo['color'],
+					                  	                             icon:        markerInfo['icon'] }    )})
+
+				marker.bindPopup(markerInfo['popUp']);
+				
+				marker.addTo(map);
+			}
+		}
+	</script>
+	<div id="map"></div>
+</body>
+</html>
